@@ -8,28 +8,37 @@ type Props = {
   className?: string;
 };
 
-export function SectionHeading({ tag, title, lede, align = "left", className }: Props) {
+export function SectionHeading({ tag, title, lede, align = "center", className }: Props) {
   return (
     <div
       className={cn(
-        "space-y-4",
-        align === "center" ? "text-center mx-auto max-w-2xl" : "max-w-2xl",
+        "space-y-6",
+        align === "center" ? "text-center mx-auto max-w-3xl" : "max-w-3xl",
         className,
       )}
     >
       <div
         className={cn(
-          "inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-fuchsia-neon",
+          "inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.22em] text-fuchsia-neon",
+          align === "center" && "justify-center w-full",
         )}
       >
-        <span className="h-px w-6 bg-fuchsia-neon/60" aria-hidden />
+        <span className="h-px w-8 bg-fuchsia-neon/50" aria-hidden />
         {tag}
+        <span className="h-px w-8 bg-fuchsia-neon/50" aria-hidden />
       </div>
-      <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-balance">
+      <h2 className="text-4xl sm:text-5xl lg:text-[3rem] font-medium tracking-tight text-balance leading-[1.15]">
         {title}
       </h2>
       {lede && (
-        <p className="text-lg text-text-muted text-pretty leading-relaxed">{lede}</p>
+        <p
+          className={cn(
+            "text-lg text-text-muted text-pretty leading-relaxed",
+            align === "center" && "mx-auto",
+          )}
+        >
+          {lede}
+        </p>
       )}
     </div>
   );

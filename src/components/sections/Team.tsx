@@ -13,44 +13,41 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-    <path d="M18.244 2H21.5l-7.5 8.572L23 22h-6.844l-5.36-7.013L4.6 22H1.343l8.06-9.21L1 2h7l4.846 6.404L18.244 2zm-1.2 18h1.838L7.04 4H5.07l11.974 16z" />
+    <path d="M18.244 2H21.5l-7.5 8.572L23 22h-6.844l-5.36-7.013L4.6 22H1.343l8.06-9.21L1 2h7l4.846 6.404L18.244 2z" />
   </svg>
 );
 
 export function Team() {
   const { locale, t } = useLocale();
   return (
-    <section id="team" className="relative py-24 lg:py-32 scroll-mt-20">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 space-y-16">
-        <SectionHeading tag="04 — Team" title={t.team.title} lede={t.team.lede} />
+    <section id="team" className="relative py-32 lg:py-48 scroll-mt-20">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 space-y-16 lg:space-y-20">
+        <SectionHeading
+          tag="04 · Team"
+          title={t.team.title}
+          lede={t.team.lede}
+          align="center"
+        />
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
           {partners.map((p, i) => (
-            <Reveal
-              key={p.slug}
-              delay={i * 0.05}
-              className="group relative overflow-hidden rounded-xl border border-line bg-ink p-8 lg:p-10 hover:border-fuchsia-neon/40 transition-colors"
-            >
-              <div className="flex items-start gap-6">
-                <div
-                  className="h-20 w-20 shrink-0 rounded-full bg-gradient-to-br from-fuchsia-neon/30 to-violet-neon/20 border border-line-strong grid place-items-center font-mono text-2xl font-semibold text-text"
-                  aria-hidden
-                >
+            <Reveal key={p.slug} delay={i * 0.08} className="space-y-6 text-center group">
+              <div className="relative mx-auto h-28 w-28 rounded-full overflow-hidden border border-line-strong">
+                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-neon/40 to-violet-neon/20" />
+                <div className="absolute inset-0 grid place-items-center font-mono text-3xl font-medium text-white">
                   {p.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
                 </div>
-                <div className="flex-1 space-y-2">
-                  <h3 className="text-xl font-semibold tracking-tight">{p.name}</h3>
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-fuchsia-neon">
-                    {p.role[locale]}
-                  </p>
-                </div>
               </div>
-
-              <p className="mt-6 text-text-muted leading-relaxed text-pretty">
+              <div className="space-y-1.5">
+                <h3 className="text-xl font-medium tracking-tight">{p.name}</h3>
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-fuchsia-neon">
+                  {p.role[locale]}
+                </p>
+              </div>
+              <p className="text-text-muted leading-relaxed text-pretty text-[15px] max-w-md mx-auto">
                 {p.bio[locale]}
               </p>
-
-              <div className="mt-6 flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 {p.linkedin && (
                   <a
                     href={p.linkedin}

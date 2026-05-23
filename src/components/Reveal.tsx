@@ -16,10 +16,10 @@ export function Reveal({ children, delay = 0, y = 16, className, as = "div" }: P
   const MotionTag = motion[as];
   return (
     <MotionTag
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ duration: 0.5, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      initial={reduce ? false : { y }}
+      whileInView={{ y: 0 }}
+      viewport={{ once: true, amount: 0, margin: "200px 0px" }}
+      transition={{ duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={className}
     >
       {children}
