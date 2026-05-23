@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["dev"],
+      "port": 5173
+    },
+    {
+      "name": "preview",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["preview"],
+      "port": 4173
+    },
+    {
+      "name": "pasarella",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--dir", "../pasarella", "dev", "--port", "5174", "--host"],
+      "port": 5174
+    }
+  ]
+}
