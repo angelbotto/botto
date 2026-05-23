@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
+/* === Default (dark) theme tokens — these feed Tailwind utilities like bg-ink, text-text-muted, border-line === */
 @theme {
-  /* === Palette (OKLCH, tinted toward fuchsia hue, no pure #000 / #fff) === */
-  --color-ink: oklch(0.04 0.012 320);          /* near-black, slight violet tint */
+  --color-ink: oklch(0.04 0.012 320);
   --color-ink-2: oklch(0.08 0.015 320);
   --color-ink-3: oklch(0.13 0.02 320);
   --color-line: oklch(1 0 0 / 0.08);
@@ -12,29 +12,47 @@
   --color-text-muted: oklch(0.99 0.005 320 / 0.72);
   --color-text-faint: oklch(0.99 0.005 320 / 0.48);
   --color-text-dim: oklch(0.99 0.005 320 / 0.32);
-  --color-fuchsia-neon: oklch(0.72 0.28 327);  /* D946EF region */
-  --color-violet-neon: oklch(0.68 0.25 297);   /* A855F7 region */
+  --color-fuchsia-neon: oklch(0.72 0.28 327);
+  --color-violet-neon: oklch(0.68 0.25 297);
   --color-cyan-neon: oklch(0.82 0.16 195);
 
   --font-sans: var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, monospace;
 
-  /* === Custom easing curves (per Emil — built-ins are too weak) === */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-out-quart: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
-  /* === Durations === */
   --dur-tap: 140ms;
   --dur-hover: 180ms;
   --dur-enter: 240ms;
   --dur-section: 600ms;
 }
 
+/* === Light theme: redefine the same custom properties so every Tailwind utility (bg-ink, text-text-muted, border-line, etc.) flips automatically === */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-ink: oklch(0.985 0.006 80);
+  --color-ink-2: oklch(0.965 0.008 80);
+  --color-ink-3: oklch(0.925 0.012 80);
+  --color-line: oklch(0.16 0.02 320 / 0.12);
+  --color-line-strong: oklch(0.16 0.02 320 / 0.22);
+  --color-line-bright: oklch(0.16 0.02 320 / 0.32);
+  --color-text: oklch(0.17 0.02 320);
+  --color-text-muted: oklch(0.17 0.02 320 / 0.72);
+  --color-text-faint: oklch(0.17 0.02 320 / 0.48);
+  --color-text-dim: oklch(0.17 0.02 320 / 0.32);
+  --color-fuchsia-neon: oklch(0.55 0.27 327);
+  --color-violet-neon: oklch(0.5 0.24 297);
+}
+
+:root:not([data-theme="light"]) {
+  color-scheme: dark;
+}
+
 @layer base {
   html {
-    color-scheme: dark;
     scroll-behavior: smooth;
     background: var(--color-ink);
   }
@@ -48,6 +66,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     min-height: 100vh;
+    transition: background-color 220ms var(--ease-out), color 220ms var(--ease-out);
   }
 
   h1, h2, h3, h4 {
@@ -67,7 +86,6 @@
     border-radius: 2px;
   }
 
-  /* === Press feedback on all interactive elements === */
   @media (hover: hover) and (pointer: fine) {
     a, button {
       transition: transform var(--dur-tap) var(--ease-out);
@@ -86,24 +104,10 @@
     box-shadow: 0 0 60px -10px oklch(0.72 0.28 327 / 0.55);
   }
 
-  .text-glow-fuchsia {
-    text-shadow: 0 0 32px oklch(0.72 0.28 327 / 0.5);
-  }
-
   .dot-pattern {
-    background-image: radial-gradient(circle at 1px 1px, oklch(1 0 0 / 0.06) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1px 1px, var(--color-line) 1px, transparent 0);
     background-size: 18px 18px;
   }
-
-  .grid-pattern {
-    background-image:
-      linear-gradient(to right, oklch(1 0 0 / 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(1 0 0 / 0.04) 1px, transparent 1px);
-    background-size: 80px 80px;
-  }
-
-  .hairline-b { border-bottom: 1px solid var(--color-line); }
-  .hairline-t { border-top: 1px solid var(--color-line); }
 }
 
 @keyframes pulse-glow {
@@ -116,20 +120,9 @@
   50% { transform: translateY(6px); opacity: 1; }
 }
 
-@keyframes shimmer-line {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-@keyframes card-visual-breathe {
-  0%, 100% { transform: scale(1); opacity: 0.95; }
-  50% { transform: scale(1.04); opacity: 1; }
-}
-
 .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
 .animate-scroll-hint { animation: scroll-hint 2.2s ease-in-out infinite; }
 
-/* === Reduced motion === */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

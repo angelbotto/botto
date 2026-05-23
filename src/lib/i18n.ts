@@ -1,5 +1,5 @@
-export type Locale = "en" | "es";
-export const LOCALES: Locale[] = ["en", "es"];
+export type Locale = "en" | "es" | "pt";
+export const LOCALES: Locale[] = ["en", "es", "pt"];
 export const DEFAULT_LOCALE: Locale = "en";
 
 export const dict = {
@@ -24,22 +24,18 @@ export const dict = {
       lede: "Four convictions that decide every company we touch.",
       items: [
         {
-          tag: "01",
           title: "Conviction over diversification.",
           body: "Few bets. Deep presence. We don't spray capital across a portfolio — we sit in the operating chair of every company we put our name behind.",
         },
         {
-          tag: "02",
           title: "The system is the moat.",
           body: "Product, operations, automated process and growth strategy live as a single engine. Growth only compounds when the operating system is already in place. We install both, in parallel, from day zero.",
         },
         {
-          tag: "03",
           title: "Latin America has its own grammar.",
           body: "The same model lands differently in Bogotá, Mexico City and São Paulo. We don't translate Silicon Valley manuals — we design from how our region thinks, sells and connects.",
         },
         {
-          tag: "04",
           title: "The AI compounding window.",
           body: "The barrier to creation has collapsed. We're inside the best window in history to build from here. We think big and back people who do too.",
         },
@@ -51,8 +47,8 @@ export const dict = {
       items: [
         {
           tag: "01",
-          title: "Product · AI as substrate",
-          body: "We build with agents (OpenClaw) and back products where AI is the foundation, not a feature. The interface, the moat, the unit economics — all reshaped by it.",
+          title: "Product · AI · Blockchain as substrate",
+          body: "We build with agents (OpenClaw) and back products where AI and on-chain rails are the foundation, not features. Interface, moat and unit economics — all reshaped by them.",
         },
         {
           tag: "02",
@@ -114,7 +110,8 @@ export const dict = {
       tagline: "Botto · A family office turning ideas into real, scaling businesses.",
       rights: "All rights reserved.",
     },
-    lang: { label: "Language", en: "EN", es: "ES" },
+    lang: { label: "Language", en: "EN", es: "ES", pt: "PT" },
+    theme: { label: "Theme", light: "Light", dark: "Dark" },
   },
   es: {
     nav: {
@@ -137,22 +134,18 @@ export const dict = {
       lede: "Cuatro convicciones que deciden cada compañía que tocamos.",
       items: [
         {
-          tag: "01",
           title: "Convicción sobre diversificación.",
           body: "Pocas apuestas. Presencia profunda. No esparcimos capital en un portafolio — nos sentamos en la silla operativa de cada compañía donde ponemos el nombre.",
         },
         {
-          tag: "02",
           title: "El sistema es el moat.",
           body: "Producto, operación, procesos automáticos y estrategia de growth viven como un solo motor. El crecimiento solo compone cuando el sistema operativo ya está en sitio. Instalamos ambos, en paralelo, desde el día cero.",
         },
         {
-          tag: "03",
           title: "Latinoamérica tiene su propia gramática.",
           body: "El mismo modelo aterriza diferente en Bogotá, CDMX y São Paulo. No traducimos manuales del Valley — diseñamos desde cómo nuestra región piensa, vende y se conecta.",
         },
         {
-          tag: "04",
           title: "La ventana de la IA.",
           body: "La barrera para crear colapsó. Estamos dentro de la mejor ventana de la historia para construir desde aquí. Pensamos en grande y respaldamos a quienes también.",
         },
@@ -164,8 +157,8 @@ export const dict = {
       items: [
         {
           tag: "01",
-          title: "Producto · IA como sustrato",
-          body: "Construimos con agentes (OpenClaw) y respaldamos productos donde la IA es el cimiento, no una feature. La interfaz, el moat, los unit economics — todo se reescribe con ella.",
+          title: "Producto · IA · Blockchain como sustrato",
+          body: "Construimos con agentes (OpenClaw) y respaldamos productos donde la IA y los rieles on-chain son cimiento, no features. Interfaz, moat y unit economics — todo se reescribe con ellos.",
         },
         {
           tag: "02",
@@ -227,7 +220,118 @@ export const dict = {
       tagline: "Botto · Family office que convierte ideas en negocios reales que escalan.",
       rights: "Todos los derechos reservados.",
     },
-    lang: { label: "Idioma", en: "EN", es: "ES" },
+    lang: { label: "Idioma", en: "EN", es: "ES", pt: "PT" },
+    theme: { label: "Tema", light: "Claro", dark: "Oscuro" },
+  },
+  pt: {
+    nav: {
+      dna: "DNA",
+      focus: "Foco",
+      portfolio: "Portfólio",
+      team: "Partners",
+      build: "Construa conosco",
+    },
+    hero: {
+      eyebrow: "Botto · Family Office",
+      title: "Ideias morrem em slides. Nós as tornamos reais.",
+      subtitle:
+        "Family office que entra como partner operacional e de growth, levando ideias do zero ao produto escalado — desenhado na América Latina, construído para o mundo.",
+      cta: "Como trabalhamos",
+      scrollHint: "Nosso DNA",
+    },
+    dna: {
+      title: "Nosso DNA",
+      lede: "Quatro convicções que decidem cada empresa que tocamos.",
+      items: [
+        {
+          title: "Convicção acima de diversificação.",
+          body: "Poucas apostas. Presença profunda. Não pulverizamos capital num portfólio — sentamos na cadeira operacional de cada empresa onde colocamos o nome.",
+        },
+        {
+          title: "O sistema é o moat.",
+          body: "Produto, operação, processos automatizados e estratégia de growth vivem como um único motor. O crescimento só compõe quando o sistema operacional já está no lugar. Instalamos os dois, em paralelo, desde o dia zero.",
+        },
+        {
+          title: "A América Latina tem sua própria gramática.",
+          body: "O mesmo modelo aterrissa diferente em Bogotá, Cidade do México e São Paulo. Não traduzimos manuais do Vale — projetamos a partir de como nossa região pensa, vende e se conecta.",
+        },
+        {
+          title: "A janela da IA.",
+          body: "A barreira de criação colapsou. Estamos dentro da melhor janela da história para construir daqui. Pensamos grande e apoiamos quem também pensa.",
+        },
+      ],
+    },
+    focus: {
+      title: "Agnósticos de indústria. Obcecados por produto e IA.",
+      lede: "Não escolhemos setores — escolhemos problemas com caminho a produto escalável. A categoria é um detalhe.",
+      items: [
+        {
+          tag: "01",
+          title: "Produto · IA · Blockchain como substrato",
+          body: "Construímos com agentes (OpenClaw) e apoiamos produtos onde a IA e os trilhos on-chain são fundação, não features. Interface, moat e unit economics — tudo é reescrito por eles.",
+        },
+        {
+          tag: "02",
+          title: "Um sistema operacional que escala",
+          body: "Processos automatizados, disciplina financeira, playbooks de contratação, infraestrutura de ops. A camada pouco glamourosa que permite a uma empresa crescer além do seu fundador sem quebrar.",
+        },
+        {
+          tag: "03",
+          title: "Growth como motor instalado",
+          body: "Estratégia de distribuição, GTM, motion de vendas, infraestrutura de conteúdo, modelos de retenção, monetização. O crescimento deixa de ser esperança e vira sistema.",
+        },
+        {
+          tag: "04",
+          title: "Fluência regional, escala global",
+          body: "Projetamos para a forma particular da LatAm, depois conectamos talento, capital e clientes entre hemisférios. Verdade local, ambição global.",
+        },
+      ],
+    },
+    portfolio: {
+      title: "Portfólio",
+      lede: "Empresas fundadas pela Botto e projetos que co-fundamos junto a builders nos quais acreditamos.",
+      companiesTag: "Empresas",
+      projectsTag: "Projetos",
+      foundedBadge: "Fundada",
+      cofoundedBadge: "Co-fundada",
+      stealthBadge: "Stealth",
+    },
+    team: {
+      title: "Partners",
+      lede: "As pessoas por trás de cada empresa Botto. Operadores, builders e craftspeople sentados na cadeira, não no banco.",
+    },
+    build: {
+      eyebrow: "Construa conosco",
+      title: "Você traz a ideia. Nós trazemos o sistema operacional.",
+      lede:
+        "Não assinamos cheques em cima de slides. Traga um problema que você não consegue parar de pensar — nossa IA afia a narrativa, lemos cada palavra em pessoa, e se fizer sentido sentamos à mesa desde o dia um.",
+      placeholder:
+        "Que problema te obceca? Quem sofre mais? O que você construiria primeiro? Escreva no rascunho — afiamos juntos.",
+      improve: "Afiar com IA",
+      improving: "Afiando…",
+      improved: "Aqui vai uma versão mais afiada. Edite à vontade.",
+      send: "Enviar à Botto",
+      sending: "Enviando…",
+      sent: "Recebido. Lemos cada envio em pessoa. Espere uma resposta em 5 dias úteis.",
+      error: "Algo deu errado. Tente de novo ou escreva direto.",
+      nameLabel: "Seu nome",
+      emailLabel: "E-mail",
+      companyLabel: "Projeto ou empresa (opcional)",
+      ideaLabel: "O que você quer construir",
+      directTitle: "Outros assuntos",
+      directBody: "Imprensa, parcerias, contratação — qualquer outra coisa.",
+      directCta: "Escreva direto",
+      howItWorks: "Como funciona",
+      step1: "Escreva sua ideia — rascunho está bom.",
+      step2: "Nossa IA reescreve como um pitch afiado.",
+      step3: "Edita, aprova, e chega aos partners.",
+    },
+    footer: {
+      tagline: "Botto · Family office que transforma ideias em negócios reais que escalam.",
+      rights: "Todos os direitos reservados.",
+    },
+    lang: { label: "Idioma", en: "EN", es: "ES", pt: "PT" },
+    theme: { label: "Tema", light: "Claro", dark: "Escuro" },
   },
 } as const;
 

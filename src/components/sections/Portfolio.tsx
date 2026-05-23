@@ -5,6 +5,7 @@ import { useLocale } from "@/components/LocaleProvider";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CardVisual } from "@/components/CardVisual";
 import { companies, projects, type Entity } from "@/content/companies";
+import type { Locale } from "@/lib/i18n";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -67,7 +68,7 @@ function EntityGrid({
   muted,
 }: {
   items: Entity[];
-  locale: "en" | "es";
+  locale: Locale;
   t: { portfolio: { foundedBadge: string; cofoundedBadge: string; stealthBadge: string } };
   muted?: boolean;
 }) {
@@ -96,7 +97,7 @@ function PortfolioCard({
   muted = false,
 }: {
   entity: Entity;
-  locale: "en" | "es";
+  locale: Locale;
   t: { portfolio: { foundedBadge: string; cofoundedBadge: string; stealthBadge: string } };
   muted?: boolean;
 }) {

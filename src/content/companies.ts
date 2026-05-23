@@ -1,3 +1,7 @@
+import type { Locale } from "@/lib/i18n";
+
+type L10n = Record<Locale, string>;
+
 export type Entity = {
   slug: string;
   name: string;
@@ -5,8 +9,8 @@ export type Entity = {
   year?: number;
   url?: string;
   status?: "live" | "stealth";
-  tagline: { en: string; es: string };
-  sector: { en: string; es: string };
+  tagline: L10n;
+  sector: L10n;
 };
 
 export const companies: Entity[] = [
@@ -20,8 +24,9 @@ export const companies: Entity[] = [
     tagline: {
       en: "B2B middle-mile freight platform moving Latin America's industrial economy.",
       es: "Plataforma B2B de carga middle-mile que mueve la economía industrial de Latinoamérica.",
+      pt: "Plataforma B2B de frete middle-mile que move a economia industrial da América Latina.",
     },
-    sector: { en: "Logistics", es: "Logística" },
+    sector: { en: "Logistics", es: "Logística", pt: "Logística" },
   },
   {
     slug: "tikin",
@@ -33,8 +38,9 @@ export const companies: Entity[] = [
     tagline: {
       en: "Global money platform — multi-currency accounts, cards and crypto without borders.",
       es: "Plataforma de dinero global — cuentas multimoneda, tarjetas y cripto sin fronteras.",
+      pt: "Plataforma de dinheiro global — contas multimoeda, cartões e cripto sem fronteiras.",
     },
-    sector: { en: "Fintech", es: "Fintech" },
+    sector: { en: "Fintech", es: "Fintech", pt: "Fintech" },
   },
   {
     slug: "beu",
@@ -46,8 +52,13 @@ export const companies: Entity[] = [
     tagline: {
       en: "The easiest way to earn money on the internet.",
       es: "La forma más fácil de hacer dinero en internet.",
+      pt: "A forma mais fácil de ganhar dinheiro na internet.",
     },
-    sector: { en: "Creator Economy", es: "Economía Creadora" },
+    sector: {
+      en: "Creator Economy",
+      es: "Economía Creadora",
+      pt: "Economia Criadora",
+    },
   },
 ];
 
@@ -61,8 +72,9 @@ export const projects: Entity[] = [
     tagline: {
       en: "Digital collectibles where every drop has a guaranteed winner.",
       es: "Coleccionables digitales donde cada drop tiene un ganador garantizado.",
+      pt: "Colecionáveis digitais onde cada drop tem um ganhador garantido.",
     },
-    sector: { en: "Web3", es: "Web3" },
+    sector: { en: "Web3", es: "Web3", pt: "Web3" },
   },
   {
     slug: "catabum",
@@ -73,8 +85,9 @@ export const projects: Entity[] = [
     tagline: {
       en: "Building in private. More soon.",
       es: "Construyendo en privado. Pronto más.",
+      pt: "Construindo em privado. Em breve mais.",
     },
-    sector: { en: "Stealth", es: "Stealth" },
+    sector: { en: "Stealth", es: "Stealth", pt: "Stealth" },
   },
   {
     slug: "laperla",
@@ -85,7 +98,8 @@ export const projects: Entity[] = [
     tagline: {
       en: "Building in private. More soon.",
       es: "Construyendo en privado. Pronto más.",
+      pt: "Construindo em privado. Em breve mais.",
     },
-    sector: { en: "Stealth", es: "Stealth" },
+    sector: { en: "Stealth", es: "Stealth", pt: "Stealth" },
   },
 ];

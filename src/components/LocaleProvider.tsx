@@ -16,9 +16,11 @@ const STORAGE_KEY = "botto.locale";
 function detectInitialLocale(): Locale {
   if (typeof window === "undefined") return DEFAULT_LOCALE;
   const stored = window.localStorage.getItem(STORAGE_KEY) as Locale | null;
-  if (stored === "en" || stored === "es") return stored;
+  if (stored === "en" || stored === "es" || stored === "pt") return stored;
   const nav = window.navigator.language.toLowerCase();
-  return nav.startsWith("es") ? "es" : "en";
+  if (nav.startsWith("pt")) return "pt";
+  if (nav.startsWith("es")) return "es";
+  return "en";
 }
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
