@@ -1,8 +1,8 @@
 "use client";
 
+import { motion, useReducedMotion } from "motion/react";
 import { useLocale } from "@/components/LocaleProvider";
 import { SectionHeading } from "@/components/SectionHeading";
-import { Reveal } from "@/components/Reveal";
 import { partners } from "@/content/team";
 
 const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -19,21 +19,36 @@ const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export function Team() {
   const { locale, t } = useLocale();
+  const reduce = useReducedMotion();
   return (
-    <section id="team" className="relative py-32 lg:py-48 scroll-mt-20">
+    <section
+      id="team"
+      className="relative py-32 lg:py-44 scroll-mt-20 border-b border-line"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-10 space-y-16 lg:space-y-20">
         <SectionHeading
-          tag="04 · Team"
+          tag="04 · Partners"
           title={t.team.title}
           lede={t.team.lede}
           align="center"
         />
 
-        <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
+        <div className="grid gap-10 md:grid-cols-2 max-w-5xl mx-auto">
           {partners.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 0.08} className="space-y-6 text-center group">
-              <div className="relative mx-auto h-28 w-28 rounded-full overflow-hidden border border-line-strong">
-                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-neon/40 to-violet-neon/20" />
+            <motion.article
+              key={p.slug}
+              initial={reduce ? false : { y: 14 }}
+              whileInView={{ y: 0 }}
+              viewport={{ once: true, amount: 0, margin: "200px 0px" }}
+              transition={{
+                duration: 0.6,
+                delay: i * 0.08,
+                ease: [0.21, 1, 0.32, 1],
+              }}
+              className="group text-center space-y-6"
+            >
+              <div className="relative mx-auto h-28 w-28 rounded-full overflow-hidden border border-line-strong group-hover:border-fuchsia-neon/50 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]">
+                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-neon/40 to-violet-neon/20 group-hover:from-fuchsia-neon/55 group-hover:to-violet-neon/30 transition-all duration-[var(--dur-hover)] ease-[var(--ease-out)]" />
                 <div className="absolute inset-0 grid place-items-center font-mono text-3xl font-medium text-white">
                   {p.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
                 </div>
@@ -53,7 +68,7 @@ export function Team() {
                     href={p.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="h-9 w-9 inline-flex items-center justify-center rounded-md border border-line text-text-muted hover:text-fuchsia-neon hover:border-fuchsia-neon/40 transition-colors"
+                    className="h-9 w-9 inline-flex items-center justify-center rounded-md border border-line text-text-muted hover:text-fuchsia-neon hover:border-fuchsia-neon/40 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
                     aria-label="LinkedIn"
                   >
                     <LinkedinIcon className="h-4 w-4" />
@@ -64,14 +79,14 @@ export function Team() {
                     href={p.twitter}
                     target="_blank"
                     rel="noreferrer"
-                    className="h-9 w-9 inline-flex items-center justify-center rounded-md border border-line text-text-muted hover:text-fuchsia-neon hover:border-fuchsia-neon/40 transition-colors"
+                    className="h-9 w-9 inline-flex items-center justify-center rounded-md border border-line text-text-muted hover:text-fuchsia-neon hover:border-fuchsia-neon/40 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
                     aria-label="X / Twitter"
                   >
                     <XIcon className="h-4 w-4" />
                   </a>
                 )}
               </div>
-            </Reveal>
+            </motion.article>
           ))}
         </div>
       </div>

@@ -1,8 +1,8 @@
 "use client";
 
+import { motion, useReducedMotion } from "motion/react";
 import { useLocale } from "@/components/LocaleProvider";
 import { SectionHeading } from "@/components/SectionHeading";
-import { Reveal } from "@/components/Reveal";
 import { companies, projects, type Entity } from "@/content/companies";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,7 +10,10 @@ import { cn } from "@/lib/utils";
 export function Portfolio() {
   const { locale, t } = useLocale();
   return (
-    <section id="portfolio" className="relative py-32 lg:py-48 scroll-mt-20">
+    <section
+      id="portfolio"
+      className="relative py-32 lg:py-44 scroll-mt-20 border-b border-line"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-10 space-y-20 lg:space-y-28">
         <SectionHeading
           tag="03 · Portfolio"
@@ -21,24 +24,12 @@ export function Portfolio() {
 
         <div className="space-y-10">
           <GroupHeading label={t.portfolio.companiesTag} count={companies.length} />
-          <div className="grid gap-px bg-line border border-line rounded-xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
-            {companies.map((c, i) => (
-              <Reveal key={c.slug} delay={i * 0.05}>
-                <EntityCard entity={c} locale={locale} t={t} />
-              </Reveal>
-            ))}
-          </div>
+          <EntityGrid items={companies} locale={locale} t={t} />
         </div>
 
         <div className="space-y-10">
           <GroupHeading label={t.portfolio.projectsTag} count={projects.length} />
-          <div className="grid gap-px bg-line border border-line rounded-xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 0.05}>
-                <EntityCard entity={p} locale={locale} t={t} muted />
-              </Reveal>
-            ))}
-          </div>
+          <EntityGrid items={projects} locale={locale} t={t} muted />
         </div>
       </div>
     </section>
@@ -55,6 +46,35 @@ function GroupHeading({ label, count }: { label: string; count: number }) {
       <div className="font-mono text-[11px] text-text-faint tabular-nums">
         {String(count).padStart(2, "0")}
       </div>
+    </div>
+  );
+}
+
+function EntityGrid({
+  items,
+  locale,
+  t,
+  muted,
+}: {
+  items: Entity[];
+  locale: "en" | "es";
+  t: { portfolio: { foundedBadge: string; cofoundedBadge: string; stealthBadge: string } };
+  muted?: boolean;
+}) {
+  const reduce = useReducedMotion();
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line rounded-xl overflow-hidden">
+      {items.map((entity, i) => (
+        <motion.div
+          key={entity.slug}
+          initial={reduce ? false : { y: 14 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, amount: 0, margin: "200px 0px" }}
+          transition={{ duration: 0.5, delay: i * 0.05, ease: [0.21, 1, 0.32, 1] }}
+        >
+          <EntityCard entity={entity} locale={locale} t={t} muted={muted} />
+        </motion.div>
+      ))}
     </div>
   );
 }
@@ -80,15 +100,19 @@ function EntityCard({
     <Wrapper
       {...wrapperProps}
       className={cn(
-        "relative block h-full p-8 group transition-colors bg-ink",
-        entity.url ? "cursor-pointer hover:bg-white/[0.025]" : "",
+        "relative block h-full p-8 group bg-ink transition-all duration-[var(--dur-hover)] ease-[var(--ease-out)]",
+        entity.url && "cursor-pointer hover:bg-white/[0.025]",
         muted && "opacity-95",
       )}
     >
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-fuchsia-neon/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[var(--dur-hover)] ease-[var(--ease-out)]"
+      />
       <div className="flex items-start justify-between gap-4 mb-6">
         <LogoMark name={entity.name} muted={muted} />
         {entity.url && (
-          <ArrowUpRight className="h-4 w-4 text-text-faint group-hover:text-fuchsia-neon transition-colors" />
+          <ArrowUpRight className="h-4 w-4 text-text-faint group-hover:text-fuchsia-neon group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-[var(--dur-hover)] ease-[var(--ease-out)]" />
         )}
       </div>
 
@@ -127,10 +151,10 @@ function LogoMark({ name, muted }: { name: string; muted?: boolean }) {
   return (
     <div
       className={cn(
-        "relative h-12 w-12 rounded-md border grid place-items-center font-mono text-sm font-medium text-text overflow-hidden",
+        "relative h-12 w-12 rounded-md border grid place-items-center font-mono text-sm font-medium text-text overflow-hidden transition-all duration-[var(--dur-hover)] ease-[var(--ease-out)]",
         muted
-          ? "border-line bg-white/[0.02]"
-          : "border-line-strong bg-gradient-to-br from-fuchsia-neon/15 to-violet-neon/8",
+          ? "border-line bg-white/[0.02] group-hover:border-line-strong"
+          : "border-line-strong bg-gradient-to-br from-fuchsia-neon/15 to-violet-neon/8 group-hover:scale-105 group-hover:from-fuchsia-neon/25 group-hover:to-violet-neon/12",
       )}
     >
       <span className="relative z-10">{initials}</span>

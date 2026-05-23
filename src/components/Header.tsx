@@ -30,37 +30,43 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-[var(--dur-hover)] ease-[var(--ease-out)]",
         scrolled
-          ? "bg-black/75 backdrop-blur-xl border-b border-line"
+          ? "bg-ink/80 backdrop-blur-xl border-b border-line"
           : "bg-transparent border-b border-transparent",
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-10">
         <a
           href="#top"
-          className="text-[15px] font-medium tracking-[-0.01em] hover:text-fuchsia-neon transition-colors"
+          className="group text-[15px] font-medium tracking-[-0.01em] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
         >
-          Botto
+          <span className="text-white group-hover:text-fuchsia-neon transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]">
+            Botto
+          </span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-8 text-[13px] font-medium">
+        <nav className="hidden lg:flex items-center gap-9 text-[13px] font-medium">
           {links.map((l) => (
             <a
               key={l.key}
               href={l.href}
-              className="text-white/80 hover:text-white transition-colors"
+              className="group relative text-white/75 hover:text-white transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
             >
               {t.nav[l.key]}
+              <span
+                aria-hidden
+                className="absolute left-0 right-0 -bottom-1 h-px bg-fuchsia-neon scale-x-0 group-hover:scale-x-100 transition-transform duration-[var(--dur-hover)] ease-[var(--ease-out)] origin-left"
+              />
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-5">
           <button
             type="button"
             onClick={toggleLocale}
-            className="hidden sm:inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-white/60 hover:text-fuchsia-neon transition-colors"
+            className="hidden sm:inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-white/55 hover:text-fuchsia-neon transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
             aria-label={t.lang.label}
           >
             {locale === "en" ? "ES" : "EN"}
@@ -84,7 +90,7 @@ export function Header() {
       </div>
 
       {open && (
-        <nav className="lg:hidden border-t border-line bg-black/95 backdrop-blur-xl">
+        <nav className="lg:hidden border-t border-line bg-ink/95 backdrop-blur-xl">
           <ul className="mx-auto max-w-7xl px-6 py-4 flex flex-col">
             {links.map((l) => (
               <li key={l.key}>
