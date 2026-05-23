@@ -1,9 +1,9 @@
-import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const PROMPT_EN = `You are the in-house pitch editor for Botto Capital, an operator-led family office based in Latin America that backs and co-founds category-defining tech companies.
 
@@ -36,9 +36,9 @@ Reglas:
 - Largo total bajo 220 palabras.`;
 
 export async function POST(req: Request) {
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.OPENAI_API_KEY) {
     return NextResponse.json(
-      { error: "ANTHROPIC_API_KEY not configured" },
+      { error: "OPENAI_API_KEY not configured" },
       { status: 500 },
     );
   }
@@ -57,19 +57,17 @@ export async function POST(req: Request) {
   }
 
   try {
-    const message = await client.messages.create({
-      model: "claude-haiku-4-5-20251001",
+    const completion = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      temperature: 0.5,
       max_tokens: 800,
-      system: locale === "es" ? PROMPT_ES : PROMPT_EN,
-      messages: [{ role: "user", content: idea }],
+      messages: [
+        { role: "system", content: locale === "es" ? PROMPT_ES : PROMPT_EN },
+        { role: "user", content: idea },
+      ],
     });
 
-    const improved = message.content
-      .filter((block): block is Anthropic.TextBlock => block.type === "text")
-      .map((b) => b.text)
-      .join("\n")
-      .trim();
-
+    const improved = completion.choices[0]?.message?.content?.trim();
     if (!improved) {
       return NextResponse.json({ error: "Empty response" }, { status: 502 });
     }
