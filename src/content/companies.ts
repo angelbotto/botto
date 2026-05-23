@@ -1,9 +1,10 @@
 export type Entity = {
   slug: string;
   name: string;
-  founder: "angel" | "stivens" | "both";
+  role: "founded" | "cofounded";
   year?: number;
   url?: string;
+  status?: "live" | "stealth";
   tagline: { en: string; es: string };
   sector: { en: string; es: string };
 };
@@ -12,19 +13,21 @@ export const companies: Entity[] = [
   {
     slug: "liftit",
     name: "Liftit",
-    founder: "angel",
+    role: "founded",
+    status: "live",
     year: 2017,
     url: "https://liftit.co",
     tagline: {
-      en: "Middle-mile freight platform moving Latin America's industrial economy.",
-      es: "Plataforma de carga middle-mile que mueve la economía industrial de Latinoamérica.",
+      en: "B2B middle-mile freight platform moving Latin America's industrial economy.",
+      es: "Plataforma B2B de carga middle-mile que mueve la economía industrial de Latinoamérica.",
     },
     sector: { en: "Logistics", es: "Logística" },
   },
   {
     slug: "tikin",
     name: "Tikin",
-    founder: "both",
+    role: "founded",
+    status: "live",
     year: 2024,
     url: "https://tikin.is",
     tagline: {
@@ -36,7 +39,8 @@ export const companies: Entity[] = [
   {
     slug: "beu",
     name: "Beu",
-    founder: "both",
+    role: "founded",
+    status: "live",
     year: 2014,
     url: "https://beu.app",
     tagline: {
@@ -51,7 +55,8 @@ export const projects: Entity[] = [
   {
     slug: "cobralo",
     name: "Cobralo",
-    founder: "both",
+    role: "cofounded",
+    status: "live",
     url: "https://cobralo.co",
     tagline: {
       en: "Digital collectibles where every drop has a guaranteed winner.",
@@ -62,20 +67,24 @@ export const projects: Entity[] = [
   {
     slug: "catabum",
     name: "Catabum",
-    founder: "both",
+    role: "cofounded",
+    status: "stealth",
+    url: "https://catabum.com",
     tagline: {
-      en: "Coming soon. Building in private.",
-      es: "Pronto. En construcción.",
+      en: "Building in private. More soon.",
+      es: "Construyendo en privado. Pronto más.",
     },
     sector: { en: "Stealth", es: "Stealth" },
   },
   {
     slug: "laperla",
     name: "La Perla",
-    founder: "both",
+    role: "cofounded",
+    status: "stealth",
+    url: "https://laperla.is",
     tagline: {
-      en: "Coming soon. Building in private.",
-      es: "Pronto. En construcción.",
+      en: "Building in private. More soon.",
+      es: "Construyendo en privado. Pronto más.",
     },
     sector: { en: "Stealth", es: "Stealth" },
   },

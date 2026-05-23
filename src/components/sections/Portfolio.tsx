@@ -19,23 +19,23 @@ export function Portfolio() {
           align="center"
         />
 
-        <div className="space-y-12">
+        <div className="space-y-10">
           <GroupHeading label={t.portfolio.companiesTag} count={companies.length} />
           <div className="grid gap-px bg-line border border-line rounded-xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
             {companies.map((c, i) => (
               <Reveal key={c.slug} delay={i * 0.05}>
-                <EntityCard entity={c} locale={locale} />
+                <EntityCard entity={c} locale={locale} t={t} />
               </Reveal>
             ))}
           </div>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-10">
           <GroupHeading label={t.portfolio.projectsTag} count={projects.length} />
           <div className="grid gap-px bg-line border border-line rounded-xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.05}>
-                <EntityCard entity={p} locale={locale} muted />
+                <EntityCard entity={p} locale={locale} t={t} muted />
               </Reveal>
             ))}
           </div>
@@ -62,23 +62,27 @@ function GroupHeading({ label, count }: { label: string; count: number }) {
 function EntityCard({
   entity,
   locale,
+  t,
   muted = false,
 }: {
   entity: Entity;
   locale: "en" | "es";
+  t: { portfolio: { foundedBadge: string; cofoundedBadge: string; stealthBadge: string } };
   muted?: boolean;
 }) {
   const Wrapper = entity.url ? "a" : "div";
   const wrapperProps = entity.url
     ? { href: entity.url, target: "_blank", rel: "noreferrer" }
     : {};
+  const roleBadge =
+    entity.role === "founded" ? t.portfolio.foundedBadge : t.portfolio.cofoundedBadge;
   return (
     <Wrapper
       {...wrapperProps}
       className={cn(
         "relative block h-full p-8 group transition-colors bg-ink",
-        entity.url ? "cursor-pointer hover:bg-white/[0.02]" : "",
-        muted && "opacity-90",
+        entity.url ? "cursor-pointer hover:bg-white/[0.025]" : "",
+        muted && "opacity-95",
       )}
     >
       <div className="flex items-start justify-between gap-4 mb-6">
@@ -89,10 +93,15 @@ function EntityCard({
       </div>
 
       <div className="space-y-3">
-        <div className="flex items-baseline gap-3">
+        <div className="flex items-baseline gap-3 flex-wrap">
           <h3 className="text-xl font-medium tracking-tight">{entity.name}</h3>
           {entity.year && (
             <span className="font-mono text-[11px] text-text-faint">{entity.year}</span>
+          )}
+          {entity.status === "stealth" && (
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-fuchsia-neon/80 border border-fuchsia-neon/30 rounded-sm px-1.5 py-0.5">
+              {t.portfolio.stealthBadge}
+            </span>
           )}
         </div>
         <p className="text-sm text-text-muted leading-relaxed text-pretty min-h-[3.5em]">
@@ -101,13 +110,7 @@ function EntityCard({
         <div className="flex items-center gap-2 pt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-text-faint">
           <span className="text-fuchsia-neon/70">{entity.sector[locale]}</span>
           <span aria-hidden>·</span>
-          <span>
-            {entity.founder === "angel"
-              ? "Founded · Angel"
-              : entity.founder === "stivens"
-                ? "Founded · Stivens"
-                : "Co-founded"}
-          </span>
+          <span>{roleBadge}</span>
         </div>
       </div>
     </Wrapper>

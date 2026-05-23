@@ -38,7 +38,7 @@ export function Hero() {
 
           <div className="pt-4">
             <a
-              href="#focus"
+              href="#dna"
               className="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2 text-[15px] font-medium text-black transition-all hover:bg-fuchsia-neon hover:text-white hover:scale-[1.02]"
             >
               {t.hero.cta}
