@@ -2,7 +2,6 @@ export type Partner = {
   slug: string;
   name: string;
   role: { en: string; es: string };
-  superpower: { en: string; es: string };
   bio: { en: string; es: string };
   linkedin?: string;
   twitter?: string;
@@ -12,14 +11,10 @@ export const partners: Partner[] = [
   {
     slug: "angel",
     name: "Angel Celis Botto",
-    role: { en: "Founder · Operations & Tech", es: "Fundador · Operación y Tech" },
-    superpower: {
-      en: "Operations, finance, tech, process",
-      es: "Operación, finanzas, tecnología, procesos",
-    },
+    role: { en: "Operating Partner", es: "Operating Partner" },
     bio: {
-      en: "Founded Liftit (B2B logistics, scaled across LatAm). Builds OpenClaw, an agentic AI runtime. 15+ years shipping product, designing operating systems, and making the boring layer of a company work so growth can compound.",
-      es: "Fundó Liftit (logística B2B, escalada en LatAm). Construye OpenClaw, un runtime de agentes IA. +15 años enviando producto, diseñando sistemas operativos y haciendo que la capa aburrida de la compañía funcione para que el growth componga.",
+      en: "Operating partner across the Botto portfolio with a focus on operations, finance, technology and process. Founded Liftit (B2B logistics, scaled across LatAm) and built OpenClaw, an agentic AI runtime. 15+ years shipping product and designing the operating systems that let companies outgrow their founders without breaking.",
+      es: "Operating partner del portafolio Botto con foco en operación, finanzas, tecnología y procesos. Fundó Liftit (logística B2B, escalada en LatAm) y construyó OpenClaw, un runtime de agentes IA. +15 años enviando producto y diseñando los sistemas operativos que permiten a las compañías crecer más allá de su fundador sin romperse.",
     },
     linkedin: "https://linkedin.com/in/bottico",
     twitter: "https://x.com/bottico",
@@ -27,14 +22,10 @@ export const partners: Partner[] = [
   {
     slug: "stivens",
     name: "Stivens Gómez Botto",
-    role: { en: "Founder · Growth & BD", es: "Fundador · Growth y BD" },
-    superpower: {
-      en: "Growth, marketing, sales, business development",
-      es: "Growth, marketing, ventas, business development",
-    },
+    role: { en: "Growth Partner", es: "Growth Partner" },
     bio: {
-      en: "Builds the growth engine across every Botto company — distribution, GTM, sales motion, partnerships. Turns operating discipline into compounding revenue, in LatAm and beyond.",
-      es: "Construye el motor de growth en cada compañía Botto — distribución, GTM, motion de ventas, alianzas. Convierte la disciplina operativa en ingresos que componen, en LatAm y más allá.",
+      en: "Innovative, data-driven Growth Manager with a strong focus on sales and marketing. 7+ years leading growth initiatives and cross-functional teams across technology, design, marketing, sales, data and analytics. His approach is rooted in a deep passion for understanding user needs — running experiments to validate hypotheses, designing customer acquisition strategies, building sustainable retention models, and developing financially viable monetization plans for every product he oversees.",
+      es: "Growth Manager innovador y data-driven, con foco en ventas y marketing. +7 años liderando iniciativas de growth y equipos cross-funcionales en tecnología, diseño, marketing, ventas, data y analytics. Su enfoque parte de una pasión profunda por entender al usuario — ejecuta experimentos para validar hipótesis, diseña estrategias de adquisición, construye modelos sostenibles de retención y desarrolla planes de monetización financieramente viables para cada producto que lidera.",
     },
   },
 ];
