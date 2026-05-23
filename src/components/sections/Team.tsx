@@ -20,20 +20,28 @@ const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export function Team() {
   const { locale, t } = useLocale();
   const reduce = useReducedMotion();
+  // Grid columns scale with partner count (2 today, ready for 3-4 in the future)
+  const cols =
+    partners.length >= 4
+      ? "lg:grid-cols-4"
+      : partners.length === 3
+        ? "lg:grid-cols-3"
+        : "lg:grid-cols-2";
+
   return (
     <section
       id="team"
-      className="relative py-32 lg:py-44 scroll-mt-20 border-b border-line"
+      className="relative py-32 lg:py-40 scroll-mt-20 border-b border-line"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10 space-y-16 lg:space-y-20">
         <SectionHeading
-          tag="04 · Partners"
+          tag="Partners"
           title={t.team.title}
           lede={t.team.lede}
-          align="center"
+          icon={<TeamIcon />}
         />
 
-        <div className="grid gap-10 md:grid-cols-2 max-w-5xl mx-auto">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 ${cols} gap-px bg-line border border-line rounded-xl overflow-hidden max-w-6xl mx-auto`}>
           {partners.map((p, i) => (
             <motion.article
               key={p.slug}
@@ -45,24 +53,22 @@ export function Team() {
                 delay: i * 0.08,
                 ease: [0.21, 1, 0.32, 1],
               }}
-              className="group text-center space-y-6"
+              className="group bg-ink p-8 lg:p-10 hover:bg-white/[0.015] transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)] flex flex-col"
             >
-              <div className="relative mx-auto h-28 w-28 rounded-full overflow-hidden border border-line-strong group-hover:border-fuchsia-neon/50 transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-neon/40 to-violet-neon/20 group-hover:from-fuchsia-neon/55 group-hover:to-violet-neon/30 transition-all duration-[var(--dur-hover)] ease-[var(--ease-out)]" />
-                <div className="absolute inset-0 grid place-items-center font-mono text-3xl font-medium text-white">
-                  {p.name.split(" ").map((w) => w[0]).join("").slice(0, 2)}
-                </div>
-              </div>
-              <div className="space-y-1.5">
-                <h3 className="text-xl font-medium tracking-tight">{p.name}</h3>
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-fuchsia-neon">
+              <div className="space-y-1 mb-6">
+                <h3 className="text-xl lg:text-[1.4rem] font-medium tracking-tight leading-snug">
+                  {p.name}
+                </h3>
+                <p className="text-[15px] text-text-muted">
                   {p.role[locale]}
                 </p>
               </div>
-              <p className="text-text-muted leading-relaxed text-pretty text-[15px] max-w-md mx-auto">
+
+              <p className="text-[15px] text-text-muted leading-relaxed text-pretty flex-1">
                 {p.bio[locale]}
               </p>
-              <div className="flex items-center justify-center gap-2">
+
+              <div className="flex items-center gap-2 mt-8 pt-6 border-t border-line/60">
                 {p.linkedin && (
                   <a
                     href={p.linkedin}
@@ -85,11 +91,27 @@ export function Team() {
                     <XIcon className="h-4 w-4" />
                   </a>
                 )}
+                {!p.linkedin && !p.twitter && (
+                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-text-faint">
+                    Soon
+                  </span>
+                )}
               </div>
             </motion.article>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function TeamIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <circle cx="4" cy="4" r="2" />
+      <path d="M1 10 Q 4 7 7 10" />
+      <circle cx="9" cy="5" r="1.5" />
+      <path d="M7 10.5 Q 9 8.5 11 10.5" />
+    </svg>
   );
 }
