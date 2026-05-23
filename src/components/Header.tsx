@@ -1,12 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
 import { useLocale } from "@/components/LocaleProvider";
+import { LanguageMenu } from "@/components/LanguageMenu";
 import { cn } from "@/lib/utils";
-import type { Locale } from "@/lib/i18n";
-import { LOCALES } from "@/lib/i18n";
-import { Moon, Sun } from "lucide-react";
 
 const links = [
   { href: "#dna", key: "dna" },
@@ -17,13 +14,9 @@ const links = [
 ] as const;
 
 export function Header() {
-  const { t, locale, setLocale } = useLocale();
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { t } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -32,25 +25,12 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const cycleLocale = () => {
-    const i = LOCALES.indexOf(locale);
-    const next = LOCALES[(i + 1) % LOCALES.length] as Locale;
-    setLocale(next);
-  };
-
-  const toggleTheme = () => {
-    const current = (theme === "system" ? resolvedTheme : theme) ?? "dark";
-    setTheme(current === "dark" ? "light" : "dark");
-  };
-
-  const themeIsDark = (theme === "system" ? resolvedTheme : theme) === "dark";
-
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-[var(--dur-hover)] ease-[var(--ease-out)]",
         scrolled
-          ? "bg-ink/85 backdrop-blur-xl border-b border-line"
+          ? "bg-ink/80 backdrop-blur-xl border-b border-line"
           : "bg-transparent border-b border-transparent",
       )}
     >
@@ -59,7 +39,7 @@ export function Header() {
           href="#top"
           className="group text-[15px] font-medium tracking-[-0.01em]"
         >
-          <span className="text-text group-hover:text-fuchsia-neon transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]">
+          <span className="text-white group-hover:text-fuchsia-neon transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]">
             Botto
           </span>
         </a>
@@ -69,7 +49,7 @@ export function Header() {
             <a
               key={l.key}
               href={l.href}
-              className="group relative text-text-muted hover:text-text transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
+              className="group relative text-white/75 hover:text-white transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
             >
               {t.nav[l.key]}
               <span
@@ -81,30 +61,11 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <button
-            type="button"
-            onClick={cycleLocale}
-            className="hidden sm:inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-text-faint hover:text-fuchsia-neon transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
-            aria-label={t.lang.label}
-            title={`${t.lang.label}: ${t.lang[locale]}`}
-          >
-            {t.lang[locale]}
-          </button>
-          {mounted && (
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="hidden sm:inline-flex h-8 w-8 items-center justify-center rounded-md text-text-faint hover:text-fuchsia-neon transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)]"
-              aria-label={t.theme.label}
-              title={themeIsDark ? t.theme.light : t.theme.dark}
-            >
-              {themeIsDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </button>
-          )}
+          <LanguageMenu className="hidden sm:block" />
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
-            className="lg:hidden h-9 w-9 inline-flex items-center justify-center text-text"
+            className="lg:hidden h-9 w-9 inline-flex items-center justify-center text-white"
             aria-label="Menu"
             aria-expanded={open}
           >
@@ -127,20 +88,17 @@ export function Header() {
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block py-3.5 text-sm text-text-muted hover:text-text border-b border-line/50 last:border-0"
+                  className="block py-3.5 text-sm text-white/80 hover:text-white border-b border-line/50 last:border-0"
                 >
                   {t.nav[l.key]}
                 </a>
               </li>
             ))}
-            <li className="flex items-center justify-between py-3.5 text-sm text-text-faint font-mono uppercase tracking-[0.18em]">
-              <button type="button" onClick={cycleLocale}>{t.lang[locale]}</button>
-              {mounted && (
-                <button type="button" onClick={toggleTheme} className="inline-flex items-center gap-1.5">
-                  {themeIsDark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-                  {themeIsDark ? t.theme.light : t.theme.dark}
-                </button>
-              )}
+            <li className="py-3.5 flex items-center justify-between">
+              <span className="text-sm text-white/60 font-mono uppercase tracking-[0.18em]">
+                {t.lang.label}
+              </span>
+              <LanguageMenu />
             </li>
           </ul>
         </nav>

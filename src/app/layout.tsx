@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import { LocaleProvider } from "@/components/LocaleProvider";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -72,9 +71,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <ThemeProvider>
-          <LocaleProvider>{children}</LocaleProvider>
-        </ThemeProvider>
+        <LocaleProvider>{children}</LocaleProvider>
       </body>
     </html>
   );

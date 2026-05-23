@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* === Default (dark) theme tokens — these feed Tailwind utilities like bg-ink, text-text-muted, border-line === */
 @theme {
   --color-ink: oklch(0.04 0.012 320);
   --color-ink-2: oklch(0.08 0.015 320);
@@ -30,29 +29,9 @@
   --dur-section: 600ms;
 }
 
-/* === Light theme: redefine the same custom properties so every Tailwind utility (bg-ink, text-text-muted, border-line, etc.) flips automatically === */
-:root[data-theme="light"] {
-  color-scheme: light;
-  --color-ink: oklch(0.985 0.006 80);
-  --color-ink-2: oklch(0.965 0.008 80);
-  --color-ink-3: oklch(0.925 0.012 80);
-  --color-line: oklch(0.16 0.02 320 / 0.12);
-  --color-line-strong: oklch(0.16 0.02 320 / 0.22);
-  --color-line-bright: oklch(0.16 0.02 320 / 0.32);
-  --color-text: oklch(0.17 0.02 320);
-  --color-text-muted: oklch(0.17 0.02 320 / 0.72);
-  --color-text-faint: oklch(0.17 0.02 320 / 0.48);
-  --color-text-dim: oklch(0.17 0.02 320 / 0.32);
-  --color-fuchsia-neon: oklch(0.55 0.27 327);
-  --color-violet-neon: oklch(0.5 0.24 297);
-}
-
-:root:not([data-theme="light"]) {
-  color-scheme: dark;
-}
-
 @layer base {
   html {
+    color-scheme: dark;
     scroll-behavior: smooth;
     background: var(--color-ink);
   }
@@ -66,7 +45,6 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     min-height: 100vh;
-    transition: background-color 220ms var(--ease-out), color 220ms var(--ease-out);
   }
 
   h1, h2, h3, h4 {

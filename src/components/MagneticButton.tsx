@@ -46,9 +46,9 @@ export function MagneticButton({
     <motion.span
       style={{ x, y, display: "inline-flex" }}
       className={cn(
-        "items-center gap-2 rounded-md px-5 py-2.5 text-[15px] font-medium transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97] bg-text text-ink",
+        "items-center gap-2 rounded-md bg-white px-5 py-2.5 text-[15px] font-medium text-ink transition-colors duration-[var(--dur-hover)] ease-[var(--ease-out)] active:scale-[0.97]",
         hovering &&
-          "!bg-fuchsia-neon !text-text shadow-[0_8px_40px_-12px_oklch(0.72_0.28_327_/_0.55)]",
+          "bg-fuchsia-neon text-white shadow-[0_8px_40px_-12px_oklch(0.72_0.28_327_/_0.55)]",
         className,
       )}
     >
